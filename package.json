@@ -24,7 +24,45 @@
     "check:workspace-r4": "node ./tools/validate-workspace-r4-rc1626.cjs",
     "check:workspace-r5": "node ./tools/validate-workspace-r5-rc1627.cjs",
     "check:workspace-r6": "node ./tools/validate-workspace-r6-rc1628.cjs",
-    "check:catalog-connectivity": "node ./tools/validate-catalog-connectivity-rc1629.cjs"
+    "check:catalog-connectivity": "node ./tools/validate-catalog-connectivity-rc1629.cjs",
+    "desktop:dev": "electron .",
+    "desktop:build": "electron-builder --win nsis"
   },
-  "description": "HUIDI Docs Community Local — source-available local-first foreign trade document workspace"
+  "description": "HUIDI Docs Community Local — source-available local-first foreign trade document workspace",
+  "main": "electron/main.cjs",
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.mlxg.docs",
+    "productName": "MLXG Docs",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "public",
+        "to": "public"
+      },
+      {
+        "from": "tools/local-server.cjs",
+        "to": "tools/local-server.cjs"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/assets/brand/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
 }
