@@ -80,7 +80,7 @@ function listenWithFallback(candidate){
     console.log(`HUIDI Docs Community Local 1.2.0 RC16.29 已启动：${localUrl}`);
     if(candidate!==basePort)console.log(`端口 ${basePort} 已占用，已自动切换到 ${candidate}。`);
     console.log('本地业务默认离线；飞书协作仅在你主动点击同步时由本机服务联网。');
-    if(process.platform==='win32')try{cp.exec(`start "" "${localUrl}"`)}catch(_){}
+    if(process.platform==='win32'&&process.env.HUIDI_NO_BROWSER!=='1')try{cp.exec(`start "" "${localUrl}"`)}catch(_){}
   });
 }
 listenWithFallback(basePort);
